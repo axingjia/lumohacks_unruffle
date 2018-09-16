@@ -1,0 +1,13 @@
+body {
+	background-color: #D8AE88;
+}
+#musicplayer {
+
+}
+audio#player {
+	margin-top: 10%;
+	width: 75%;
+	display: block;
+	margin: 0 auto;
+
+}

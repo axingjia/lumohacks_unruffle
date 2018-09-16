@@ -1,0 +1,13 @@
+.videoplayer {
+	/*width: 100%;*/
+
+}
+.videoplayer video {
+	width: 80%;
+	margin: 0 auto 10% auto;
+	display: block;
+}
+
+body {
+	background-color: #8299D1;
+}

@@ -1,0 +1,13 @@
+body {
+	background-color: #7CB097;
+	text-align: center;
+}
+
+#questionlist {
+	width: 60%;
+}
+
+#questionlist button {
+	height: 50px;
+	margin: 1% 0 1% 0;
+}

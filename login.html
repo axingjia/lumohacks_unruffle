@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<style>
-			.thumb{
+			/*.thumb{
 				display: inline-block;
 				margin-right: 10px;
 				margin-bottom: 10px;
@@ -16,19 +16,58 @@
 			   top: 50%;
 			   left: 50%;
 			   transform: translate(-50%, -50%);
+			}*/
+			body {
+				background-color: #D9AF89;
+				display: flex;
+				justify-content: center;/*horizontally*/
+    			align-items: center;/*vertically*/
+
+			}
+			.center {
+				/*width: 80%;*/
+				/*margin: 0 auto;*/
+				text-align: center;
+				display: flex;
+				justify-content: center;/*horizontally*/
+    			align-items: center;/*vertically*/
+			}
+			.thumb {
+				
+
+			}
+			.thumb img {
+				width: 345.6px;
+				height: 201.6px;
+				display: inline;
+			}
+			.user {
+				display: block;
+				background-color: #6FB6CF;
+				height: 50px;
+				font-size: 30px;
+			}
+			a:-webkit-any-link {
+				text-decoration-line: none;
+				color: white;
 			}
 		</style>
 	</head>
-	<body style="background-color:#8d82c4">
+	<body>
 		
 		<div class="center">
-			<div class='thumb' style="margin-right:30px">
-				<a href="./survey.html"><img src="./assets/vid_and_pic/veteran.jpg" alt=""></a>
-				
+			<div class='thumb'>
+				<a href="./survey.html">
+					<img src="./assets/vid_and_pic/veteran.jpg" alt="">
+					<div class='user'>Patient</div>
+				</a>
 			</div>
-			<span style="width:200px"></span>
+			<span style="width:100px"></span>
 			<div class="thumb">
-				<a href="#"><img src="./assets/vid_and_pic/healthcareassistant.jpg" alt=""></a>
+				<a href="#">
+					<img src="./assets/vid_and_pic/healthcareassistant.jpg" alt="">
+					<div class='user'>Doctor</div>
+				</a>
 				
 			</div>
 			

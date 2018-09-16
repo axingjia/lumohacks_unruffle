@@ -858,7 +858,7 @@
 		"Risk": 0
 	}
 ];
-	var result=alasql('select COUNT(*) as c, Risk from ? GROUP BY Risk',[data]);
+	var result=alasql('select COUNT(*) as c, Risk from ? GROUP BY Risk ORDER BY Risk ASC',[data]);
 	console.log(result);
 
 	var option = {

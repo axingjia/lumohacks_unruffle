@@ -10,7 +10,7 @@ function init() {
 function installEventListener(){
 	allButtonDisplay.forEach(function(buttonDisplay){
 		buttonDisplay.addEventListener('click', function(){
-			window.location.href = 'index.html';
+			window.location.href = 'index2.html';
 		});
 	})
 	

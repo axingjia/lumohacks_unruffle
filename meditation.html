@@ -55,6 +55,13 @@
 
         </section>
         <div id='musicplayer'>
+            <div id='controlbuttons'> 
+              <button onclick="document.getElementById('player').play()">Play</button> 
+              <button onclick="document.getElementById('player').pause()">Pause</button> 
+              <button onclick="document.getElementById('player').volume += 0.1">Vol+ </button> 
+              <button onclick="document.getElementById('player').volume -= 0.1">Vol- </button> 
+            </div>
+            <br>
             <audio id="player" controls autoplay>
                 <source src="./audio/Meditation_for_Working_with_Difficulties.mp3" type="audio/mp3">
 
@@ -62,6 +69,7 @@
                 <!-- <source src="https://cdn.plyr.io/static/demo/Kishi_Bashi_-_It_All_Began_With_a_Burst.ogg" type="audio/ogg"> -->
                 Your browser does not support the <code>audio</code> element.
             </audio>
+
         </div>
         
     </div>

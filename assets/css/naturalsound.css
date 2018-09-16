@@ -1,8 +1,8 @@
 body {
 	background-color: #D6857D;
 }
-#musicplayer {
-
+#musicplayer #controlbuttons {
+	text-align: center;
 }
 audio#player {
 	margin-top: 10%;

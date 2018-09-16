@@ -2,8 +2,8 @@
 	/*width: 100%;*/
 
 }
-.videoplayer video {
-	width: 80%;
+.videoplayer iframe {
+	/*width: 80%;*/
 	margin: 0 auto 10% auto;
 	display: block;
 }

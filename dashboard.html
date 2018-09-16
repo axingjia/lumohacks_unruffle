@@ -1,79 +1,904 @@
 <html>
 	<head>
 		<style>
-			/*.thumb{
-				display: inline-block;
-				margin-right: 10px;
-				margin-bottom: 10px;
-			}
-			.thumb img{
-				width: 180px;
-			    height: 180px;
-			    object-fit: cover;
-			}
-			.center{
-				position: fixed;
-			   top: 50%;
-			   left: 50%;
-			   transform: translate(-50%, -50%);
-			}*/
-			body {
-				background-color: #D9AF89;
-				display: flex;
-				justify-content: center;/*horizontally*/
-    			align-items: center;/*vertically*/
+			
+		</style>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/alasql/0.4.11/alasql.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
+		<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-			}
-			.center {
-				/*width: 80%;*/
-				/*margin: 0 auto;*/
-				text-align: center;
-				display: flex;
-				justify-content: center;/*horizontally*/
-    			align-items: center;/*vertically*/
-			}
-			.thumb {
-				
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-			}
-			.thumb img {
-				width: 200px;
-				height: 200px;
-				display: inline;
-				object-fit: cover;
-			}
-			.user {
-				display: block;
-				background-color: #6FB6CF;
-				height: 50px;
-				font-size: 30px;
-			}
-			a:-webkit-any-link {
-				text-decoration-line: none;
-				color: white;
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<style>
+			.nav_item{
+				padding:20px 20px;
+				color:white;
 			}
 		</style>
 	</head>
-	<body style="">
-		
-		<div class="center">
-			<div class='thumb'>
-				<a href="./login2.html">
-					<img src="./assets/vid_and_pic/care.png" alt="">
-					<br>
-					<div>Care Receiver</div>
-				</a>
+	<body style="" ng-app="myApp" ng-controller="myCtrl">
+		<div class="clearfix">
+			<div style="height:1000px;background-color:#242943;color:white;width:200px;float:left">
+				<a href="#chartContainer"><div class="nav_item">Risk Distribution</div></a>
+				<a href="#table"><div class="nav_item">Data Table</div></a>
 			</div>
-			<span style="width:100px"></span>
-			<div class="thumb">
-				<a href="#">
-					<img src="./assets/vid_and_pic/health.png" alt="">
-					<br>
-					<div>Care Provider</div>
-				</a>
-				
+			<div style="float:left">
+				<div id="chartContainer" style="width: 600px;height:400px;"></div>
+				<div style="height:500px;overflow:scroll">
+					<table id="table" class="table table-striped" >
+						<tr>
+							<th>Patient Name</th>
+							<th>Patient ID</th>
+							<th>Last Login</th>
+							<th>Treatment Used</th>
+							<th>Treatment Duration</th>
+							<th>Risk</th>
+						</tr>
+						<tr ng-repeat="value in data">
+							<td>{{value.Patient_Name}}</td>
+							<td>{{value.Patient_ID}}</td>
+							<td>{{value.Last_Login}}</td>
+							<td>{{value.Treatment_Used}}</td>
+							<td>{{value.Treatment_Duration}}</td>
+							<td>{{value.Risk}}</td>
+						</tr>
+					</table>
+				</div>
 			</div>
-			
 		</div>
+		
+		
+		
 	</body>
+	<script>
+		var data=[
+	{
+		"Patient_Name": "Jordan Y. Wyatt",
+		"Patient_ID": "16671209-1500",
+		"Last_Login": "2018-05-02 01:45:17",
+		"Treatment_Used": "guided-imagery",
+		"Treatment_Duration": 195,
+		"Risk": 5
+	},
+	{
+		"Patient_Name": "Rana N. Leonard",
+		"Patient_ID": "16140130-9453",
+		"Last_Login": "2018-05-23 04:30:32",
+		"Treatment_Used": "natural-sound",
+		"Treatment_Duration": 473,
+		"Risk": 3
+	},
+	{
+		"Patient_Name": "Paki G. Alford",
+		"Patient_ID": "16541111-7590",
+		"Last_Login": "2018-09-20 00:23:56",
+		"Treatment_Used": "meditation",
+		"Treatment_Duration": 391,
+		"Risk": 4
+	},
+	{
+		"Patient_Name": "Leroy I. Moore",
+		"Patient_ID": "16210221-2327",
+		"Last_Login": "2019-05-27 16:57:45",
+		"Treatment_Used": "custom-video",
+		"Treatment_Duration": 424,
+		"Risk": 4
+	},
+	{
+		"Patient_Name": "Sylvester N. Ayala",
+		"Patient_ID": "16990704-3948",
+		"Last_Login": "2017-09-19 19:57:36",
+		"Treatment_Used": "guided-imagery",
+		"Treatment_Duration": 161,
+		"Risk": 3
+	},
+	{
+		"Patient_Name": "Maggy O. Mcknight",
+		"Patient_ID": "16080426-6823",
+		"Last_Login": "2019-07-20 19:18:00",
+		"Treatment_Used": "custom-video",
+		"Treatment_Duration": 431,
+		"Risk": 3
+	},
+	{
+		"Patient_Name": "Caleb Z. Fernandez",
+		"Patient_ID": "16700604-3199",
+		"Last_Login": "2019-03-14 13:58:20",
+		"Treatment_Used": "custom-audio",
+		"Treatment_Duration": 80,
+		"Risk": 2
+	},
+	{
+		"Patient_Name": "Melinda D. Mccullough",
+		"Patient_ID": "16630814-2766",
+		"Last_Login": "2018-09-27 14:15:08",
+		"Treatment_Used": "custom-imagery",
+		"Treatment_Duration": 448,
+		"Risk": 3
+	},
+	{
+		"Patient_Name": "Brenna Y. Sampson",
+		"Patient_ID": "16310317-0555",
+		"Last_Login": "2019-05-19 04:08:35",
+		"Treatment_Used": "custom-audio",
+		"Treatment_Duration": 41,
+		"Risk": 2
+	},
+	{
+		"Patient_Name": "Kalia W. Molina",
+		"Patient_ID": "16510710-6303",
+		"Last_Login": "2019-01-13 13:17:12",
+		"Treatment_Used": "guided-imagery",
+		"Treatment_Duration": 2,
+		"Risk": 5
+	},
+	{
+		"Patient_Name": "Katelyn O. Goodman",
+		"Patient_ID": "16421026-2681",
+		"Last_Login": "2019-06-26 10:24:45",
+		"Treatment_Used": "custom-audio",
+		"Treatment_Duration": 494,
+		"Risk": 4
+	},
+	{
+		"Patient_Name": "Melodie N. Richardson",
+		"Patient_ID": "16130114-7615",
+		"Last_Login": "2019-07-06 22:43:55",
+		"Treatment_Used": "breathing-exercise",
+		"Treatment_Duration": 238,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "September H. Adkins",
+		"Patient_ID": "16001206-3236",
+		"Last_Login": "2017-09-09 10:26:46",
+		"Treatment_Used": "call-a-friend",
+		"Treatment_Duration": 313,
+		"Risk": 0
+	},
+	{
+		"Patient_Name": "Noelle J. Middleton",
+		"Patient_ID": "16841029-9831",
+		"Last_Login": "2018-10-22 17:11:18",
+		"Treatment_Used": "custom-video",
+		"Treatment_Duration": 372,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Nash X. Bridges",
+		"Patient_ID": "16710706-7337",
+		"Last_Login": "2019-06-19 02:54:35",
+		"Treatment_Used": "meditation",
+		"Treatment_Duration": 69,
+		"Risk": 4
+	},
+	{
+		"Patient_Name": "Kyra J. Buckley",
+		"Patient_ID": "16400926-2173",
+		"Last_Login": "2017-12-01 15:40:20",
+		"Treatment_Used": "breathing-exercise",
+		"Treatment_Duration": 2,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Jennifer I. Hutchinson",
+		"Patient_ID": "16660512-8260",
+		"Last_Login": "2019-06-29 00:30:54",
+		"Treatment_Used": "custom-video",
+		"Treatment_Duration": 208,
+		"Risk": 4
+	},
+	{
+		"Patient_Name": "Baker X. Vazquez",
+		"Patient_ID": "16510730-0351",
+		"Last_Login": "2019-02-18 20:46:44",
+		"Treatment_Used": "relaxing-video",
+		"Treatment_Duration": 116,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Sharon C. Ward",
+		"Patient_ID": "16260903-3549",
+		"Last_Login": "2018-05-11 00:42:43",
+		"Treatment_Used": "custom-video",
+		"Treatment_Duration": 134,
+		"Risk": 4
+	},
+	{
+		"Patient_Name": "Hannah S. Strong",
+		"Patient_ID": "16260315-7112",
+		"Last_Login": "2018-04-20 06:42:38",
+		"Treatment_Used": "custom-audio",
+		"Treatment_Duration": 252,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Rashad P. Harris",
+		"Patient_ID": "16340930-4742",
+		"Last_Login": "2018-01-12 11:16:09",
+		"Treatment_Used": "meditation",
+		"Treatment_Duration": 344,
+		"Risk": 2
+	},
+	{
+		"Patient_Name": "Mariam Q. Howe",
+		"Patient_ID": "16620812-2223",
+		"Last_Login": "2017-11-13 17:19:32",
+		"Treatment_Used": "natural-sound",
+		"Treatment_Duration": 77,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Gavin H. Anthony",
+		"Patient_ID": "16351001-8926",
+		"Last_Login": "2018-06-25 04:43:02",
+		"Treatment_Used": "natural-sound",
+		"Treatment_Duration": 429,
+		"Risk": 4
+	},
+	{
+		"Patient_Name": "Quamar S. Wall",
+		"Patient_ID": "16200415-4866",
+		"Last_Login": "2018-10-04 13:23:24",
+		"Treatment_Used": "relaxing-video",
+		"Treatment_Duration": 151,
+		"Risk": 0
+	},
+	{
+		"Patient_Name": "Ivory H. Fuentes",
+		"Patient_ID": "16630310-8929",
+		"Last_Login": "2019-08-20 10:22:42",
+		"Treatment_Used": "breathing-exercise",
+		"Treatment_Duration": 58,
+		"Risk": 0
+	},
+	{
+		"Patient_Name": "Chancellor U. Sweeney",
+		"Patient_ID": "16690223-5545",
+		"Last_Login": "2018-12-26 08:36:59",
+		"Treatment_Used": "custom-imagery",
+		"Treatment_Duration": 81,
+		"Risk": 3
+	},
+	{
+		"Patient_Name": "Phoebe P. Weiss",
+		"Patient_ID": "16770229-5606",
+		"Last_Login": "2017-09-13 01:35:38",
+		"Treatment_Used": "custom-video",
+		"Treatment_Duration": 57,
+		"Risk": 2
+	},
+	{
+		"Patient_Name": "Germaine Y. Francis",
+		"Patient_ID": "16180319-9916",
+		"Last_Login": "2019-04-10 04:19:50",
+		"Treatment_Used": "custom-video",
+		"Treatment_Duration": 22,
+		"Risk": 3
+	},
+	{
+		"Patient_Name": "Tanek I. Odonnell",
+		"Patient_ID": "16451217-7462",
+		"Last_Login": "2019-07-03 18:10:47",
+		"Treatment_Used": "custom-imagery",
+		"Treatment_Duration": 435,
+		"Risk": 5
+	},
+	{
+		"Patient_Name": "Leila H. Burton",
+		"Patient_ID": "16370414-4066",
+		"Last_Login": "2018-05-05 19:03:41",
+		"Treatment_Used": "guided-imagery",
+		"Treatment_Duration": 129,
+		"Risk": 5
+	},
+	{
+		"Patient_Name": "Illiana V. Garrison",
+		"Patient_ID": "16161022-6852",
+		"Last_Login": "2018-11-20 12:31:38",
+		"Treatment_Used": "natural-sound",
+		"Treatment_Duration": 448,
+		"Risk": 2
+	},
+	{
+		"Patient_Name": "Tashya W. Cain",
+		"Patient_ID": "16810407-3435",
+		"Last_Login": "2019-06-02 05:28:35",
+		"Treatment_Used": "custom-imagery",
+		"Treatment_Duration": 44,
+		"Risk": 2
+	},
+	{
+		"Patient_Name": "Gisela I. Frost",
+		"Patient_ID": "16020416-8553",
+		"Last_Login": "2019-06-11 20:59:43",
+		"Treatment_Used": "breathing-exercise",
+		"Treatment_Duration": 363,
+		"Risk": 3
+	},
+	{
+		"Patient_Name": "Martha H. Stanton",
+		"Patient_ID": "16080510-5731",
+		"Last_Login": "2018-07-02 06:56:16",
+		"Treatment_Used": "custom-video",
+		"Treatment_Duration": 427,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Theodore J. Fletcher",
+		"Patient_ID": "16580915-3884",
+		"Last_Login": "2018-04-16 22:09:28",
+		"Treatment_Used": "breathing-exercise",
+		"Treatment_Duration": 252,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Jorden L. Pace",
+		"Patient_ID": "16501213-3996",
+		"Last_Login": "2018-11-08 05:19:26",
+		"Treatment_Used": "natural-sound",
+		"Treatment_Duration": 360,
+		"Risk": 2
+	},
+	{
+		"Patient_Name": "Brendan G. Pace",
+		"Patient_ID": "16941216-7984",
+		"Last_Login": "2018-10-02 04:49:46",
+		"Treatment_Used": "natural-sound",
+		"Treatment_Duration": 79,
+		"Risk": 0
+	},
+	{
+		"Patient_Name": "Myles G. Petty",
+		"Patient_ID": "16361019-0096",
+		"Last_Login": "2019-06-26 17:16:26",
+		"Treatment_Used": "breathing-exercise",
+		"Treatment_Duration": 315,
+		"Risk": 2
+	},
+	{
+		"Patient_Name": "Shelly L. Valentine",
+		"Patient_ID": "16501202-0805",
+		"Last_Login": "2018-01-10 00:23:34",
+		"Treatment_Used": "meditation",
+		"Treatment_Duration": 452,
+		"Risk": 4
+	},
+	{
+		"Patient_Name": "Piper I. Mcmillan",
+		"Patient_ID": "16310403-6870",
+		"Last_Login": "2019-03-25 23:51:49",
+		"Treatment_Used": "guided-imagery",
+		"Treatment_Duration": 205,
+		"Risk": 2
+	},
+	{
+		"Patient_Name": "Chanda I. Rivers",
+		"Patient_ID": "16961203-4968",
+		"Last_Login": "2019-03-09 07:44:43",
+		"Treatment_Used": "guided-imagery",
+		"Treatment_Duration": 74,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Kendall R. Petty",
+		"Patient_ID": "16920128-6151",
+		"Last_Login": "2019-03-17 10:58:38",
+		"Treatment_Used": "custom-audio",
+		"Treatment_Duration": 77,
+		"Risk": 4
+	},
+	{
+		"Patient_Name": "Aristotle L. Hinton",
+		"Patient_ID": "16010217-4265",
+		"Last_Login": "2018-04-21 18:42:03",
+		"Treatment_Used": "call-a-friend",
+		"Treatment_Duration": 446,
+		"Risk": 4
+	},
+	{
+		"Patient_Name": "Kevin Y. Suarez",
+		"Patient_ID": "16920912-3240",
+		"Last_Login": "2019-03-22 14:04:11",
+		"Treatment_Used": "guided-imagery",
+		"Treatment_Duration": 341,
+		"Risk": 0
+	},
+	{
+		"Patient_Name": "Amery Z. Jensen",
+		"Patient_ID": "16960703-3496",
+		"Last_Login": "2018-05-08 13:14:18",
+		"Treatment_Used": "breathing-exercise",
+		"Treatment_Duration": 368,
+		"Risk": 4
+	},
+	{
+		"Patient_Name": "Florence Q. Sullivan",
+		"Patient_ID": "16130618-7939",
+		"Last_Login": "2018-04-27 20:28:45",
+		"Treatment_Used": "breathing-exercise",
+		"Treatment_Duration": 237,
+		"Risk": 0
+	},
+	{
+		"Patient_Name": "Athena C. Davidson",
+		"Patient_ID": "16850919-2210",
+		"Last_Login": "2018-12-10 09:08:22",
+		"Treatment_Used": "custom-imagery",
+		"Treatment_Duration": 117,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Tyler X. Nichols",
+		"Patient_ID": "16620404-7705",
+		"Last_Login": "2018-12-13 19:04:07",
+		"Treatment_Used": "custom-imagery",
+		"Treatment_Duration": 412,
+		"Risk": 4
+	},
+	{
+		"Patient_Name": "Anthony K. Hoover",
+		"Patient_ID": "16130627-6542",
+		"Last_Login": "2018-05-23 12:57:23",
+		"Treatment_Used": "custom-audio",
+		"Treatment_Duration": 323,
+		"Risk": 4
+	},
+	{
+		"Patient_Name": "Macey J. Mccarthy",
+		"Patient_ID": "16420911-3036",
+		"Last_Login": "2019-04-19 11:27:54",
+		"Treatment_Used": "meditation",
+		"Treatment_Duration": 282,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Jelani V. Espinoza",
+		"Patient_ID": "16170802-2106",
+		"Last_Login": "2019-05-30 11:26:36",
+		"Treatment_Used": "custom-audio",
+		"Treatment_Duration": 162,
+		"Risk": 2
+	},
+	{
+		"Patient_Name": "Meredith E. Mccarty",
+		"Patient_ID": "16160626-5625",
+		"Last_Login": "2018-04-10 21:07:03",
+		"Treatment_Used": "guided-imagery",
+		"Treatment_Duration": 171,
+		"Risk": 0
+	},
+	{
+		"Patient_Name": "Cassandra U. Terrell",
+		"Patient_ID": "16030121-6446",
+		"Last_Login": "2018-02-02 21:29:37",
+		"Treatment_Used": "relaxing-video",
+		"Treatment_Duration": 333,
+		"Risk": 5
+	},
+	{
+		"Patient_Name": "Riley C. Roman",
+		"Patient_ID": "16510308-5238",
+		"Last_Login": "2019-05-07 06:00:56",
+		"Treatment_Used": "breathing-exercise",
+		"Treatment_Duration": 62,
+		"Risk": 2
+	},
+	{
+		"Patient_Name": "Echo R. Lewis",
+		"Patient_ID": "16571102-2797",
+		"Last_Login": "2018-04-13 23:07:48",
+		"Treatment_Used": "custom-imagery",
+		"Treatment_Duration": 423,
+		"Risk": 4
+	},
+	{
+		"Patient_Name": "Lara T. Mullins",
+		"Patient_ID": "16990212-0865",
+		"Last_Login": "2017-09-11 06:28:48",
+		"Treatment_Used": "yoga",
+		"Treatment_Duration": 251,
+		"Risk": 3
+	},
+	{
+		"Patient_Name": "Celeste M. Miller",
+		"Patient_ID": "16920319-1409",
+		"Last_Login": "2017-09-06 02:16:57",
+		"Treatment_Used": "natural-sound",
+		"Treatment_Duration": 215,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Walker I. Gay",
+		"Patient_ID": "16841216-9420",
+		"Last_Login": "2018-05-21 22:55:37",
+		"Treatment_Used": "custom-video",
+		"Treatment_Duration": 275,
+		"Risk": 2
+	},
+	{
+		"Patient_Name": "Raymond C. Wolfe",
+		"Patient_ID": "16961011-6767",
+		"Last_Login": "2018-09-15 04:56:20",
+		"Treatment_Used": "breathing-exercise",
+		"Treatment_Duration": 22,
+		"Risk": 5
+	},
+	{
+		"Patient_Name": "Yuli W. Mckay",
+		"Patient_ID": "16010206-5760",
+		"Last_Login": "2018-11-10 06:27:03",
+		"Treatment_Used": "meditation",
+		"Treatment_Duration": 141,
+		"Risk": 0
+	},
+	{
+		"Patient_Name": "Michelle M. Goodwin",
+		"Patient_ID": "16920304-4947",
+		"Last_Login": "2017-12-03 09:40:43",
+		"Treatment_Used": "custom-imagery",
+		"Treatment_Duration": 383,
+		"Risk": 5
+	},
+	{
+		"Patient_Name": "Raja U. Crosby",
+		"Patient_ID": "16200629-6194",
+		"Last_Login": "2018-08-22 17:52:43",
+		"Treatment_Used": "call-a-friend",
+		"Treatment_Duration": 316,
+		"Risk": 3
+	},
+	{
+		"Patient_Name": "Bertha G. Nicholson",
+		"Patient_ID": "16960227-8229",
+		"Last_Login": "2018-03-13 07:15:46",
+		"Treatment_Used": "relaxing-video",
+		"Treatment_Duration": 186,
+		"Risk": 4
+	},
+	{
+		"Patient_Name": "Catherine X. Griffin",
+		"Patient_ID": "16321022-0293",
+		"Last_Login": "2018-10-10 15:54:55",
+		"Treatment_Used": "call-a-friend",
+		"Treatment_Duration": 198,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Ulric A. Cantrell",
+		"Patient_ID": "16621127-1306",
+		"Last_Login": "2019-01-01 09:10:55",
+		"Treatment_Used": "custom-audio",
+		"Treatment_Duration": 135,
+		"Risk": 0
+	},
+	{
+		"Patient_Name": "Patrick B. Gillespie",
+		"Patient_ID": "16520521-7242",
+		"Last_Login": "2017-12-18 23:05:40",
+		"Treatment_Used": "custom-video",
+		"Treatment_Duration": 291,
+		"Risk": 4
+	},
+	{
+		"Patient_Name": "Hamish C. Sanders",
+		"Patient_ID": "16280805-1615",
+		"Last_Login": "2017-09-24 16:45:25",
+		"Treatment_Used": "custom-video",
+		"Treatment_Duration": 205,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Brandon U. Santiago",
+		"Patient_ID": "16881112-5718",
+		"Last_Login": "2017-10-22 19:47:49",
+		"Treatment_Used": "natural-sound",
+		"Treatment_Duration": 223,
+		"Risk": 5
+	},
+	{
+		"Patient_Name": "Leroy O. Johns",
+		"Patient_ID": "16340624-2374",
+		"Last_Login": "2019-05-03 15:48:53",
+		"Treatment_Used": "guided-imagery",
+		"Treatment_Duration": 475,
+		"Risk": 3
+	},
+	{
+		"Patient_Name": "Reed Y. Hickman",
+		"Patient_ID": "16390904-7965",
+		"Last_Login": "2017-12-26 14:25:37",
+		"Treatment_Used": "guided-imagery",
+		"Treatment_Duration": 146,
+		"Risk": 3
+	},
+	{
+		"Patient_Name": "Walker J. Howell",
+		"Patient_ID": "16200304-6964",
+		"Last_Login": "2019-05-29 13:39:39",
+		"Treatment_Used": "guided-imagery",
+		"Treatment_Duration": 109,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Mannix U. Buck",
+		"Patient_ID": "16690105-2628",
+		"Last_Login": "2018-06-16 11:56:12",
+		"Treatment_Used": "guided-imagery",
+		"Treatment_Duration": 215,
+		"Risk": 4
+	},
+	{
+		"Patient_Name": "Reed U. Bonner",
+		"Patient_ID": "16390228-9804",
+		"Last_Login": "2019-06-27 01:48:23",
+		"Treatment_Used": "natural-sound",
+		"Treatment_Duration": 404,
+		"Risk": 5
+	},
+	{
+		"Patient_Name": "Wilma I. Richards",
+		"Patient_ID": "16970808-7375",
+		"Last_Login": "2017-12-28 13:53:37",
+		"Treatment_Used": "relaxing-video",
+		"Treatment_Duration": 108,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Dolan R. Ferrell",
+		"Patient_ID": "16030413-9355",
+		"Last_Login": "2018-08-10 09:18:01",
+		"Treatment_Used": "guided-imagery",
+		"Treatment_Duration": 176,
+		"Risk": 0
+	},
+	{
+		"Patient_Name": "Dexter W. Blake",
+		"Patient_ID": "16700402-1304",
+		"Last_Login": "2019-03-07 04:58:46",
+		"Treatment_Used": "custom-audio",
+		"Treatment_Duration": 193,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Keely F. Serrano",
+		"Patient_ID": "16480503-7480",
+		"Last_Login": "2018-01-25 12:18:03",
+		"Treatment_Used": "yoga",
+		"Treatment_Duration": 399,
+		"Risk": 3
+	},
+	{
+		"Patient_Name": "Blossom T. Ellison",
+		"Patient_ID": "16320130-9543",
+		"Last_Login": "2019-01-26 12:41:19",
+		"Treatment_Used": "natural-sound",
+		"Treatment_Duration": 310,
+		"Risk": 5
+	},
+	{
+		"Patient_Name": "Colton Z. Browning",
+		"Patient_ID": "16800621-6561",
+		"Last_Login": "2018-07-19 21:01:14",
+		"Treatment_Used": "relaxing-video",
+		"Treatment_Duration": 307,
+		"Risk": 4
+	},
+	{
+		"Patient_Name": "Vincent J. Tate",
+		"Patient_ID": "16421117-9967",
+		"Last_Login": "2019-04-30 16:19:35",
+		"Treatment_Used": "breathing-exercise",
+		"Treatment_Duration": 427,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Chase K. Santiago",
+		"Patient_ID": "16400125-4160",
+		"Last_Login": "2019-07-04 15:31:13",
+		"Treatment_Used": "call-a-friend",
+		"Treatment_Duration": 481,
+		"Risk": 3
+	},
+	{
+		"Patient_Name": "Garth Y. Harrell",
+		"Patient_ID": "16690828-5247",
+		"Last_Login": "2019-07-15 11:01:13",
+		"Treatment_Used": "meditation",
+		"Treatment_Duration": 402,
+		"Risk": 4
+	},
+	{
+		"Patient_Name": "Uta P. Cabrera",
+		"Patient_ID": "16840615-0253",
+		"Last_Login": "2018-06-14 11:13:28",
+		"Treatment_Used": "custom-audio",
+		"Treatment_Duration": 276,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Desiree C. Browning",
+		"Patient_ID": "16060610-7738",
+		"Last_Login": "2018-02-06 22:10:37",
+		"Treatment_Used": "yoga",
+		"Treatment_Duration": 434,
+		"Risk": 5
+	},
+	{
+		"Patient_Name": "Kaitlin C. Wiggins",
+		"Patient_ID": "16510824-4475",
+		"Last_Login": "2018-10-23 21:54:12",
+		"Treatment_Used": "custom-video",
+		"Treatment_Duration": 194,
+		"Risk": 2
+	},
+	{
+		"Patient_Name": "Nathaniel P. Wheeler",
+		"Patient_ID": "16650708-3894",
+		"Last_Login": "2018-05-14 08:00:54",
+		"Treatment_Used": "custom-audio",
+		"Treatment_Duration": 50,
+		"Risk": 4
+	},
+	{
+		"Patient_Name": "Zachery U. Merritt",
+		"Patient_ID": "16510511-0729",
+		"Last_Login": "2018-05-14 06:04:12",
+		"Treatment_Used": "natural-sound",
+		"Treatment_Duration": 268,
+		"Risk": 3
+	},
+	{
+		"Patient_Name": "Amos P. Jordan",
+		"Patient_ID": "16430730-2192",
+		"Last_Login": "2018-11-29 11:30:59",
+		"Treatment_Used": "custom-audio",
+		"Treatment_Duration": 204,
+		"Risk": 3
+	},
+	{
+		"Patient_Name": "Wyoming L. Stein",
+		"Patient_ID": "16340220-4014",
+		"Last_Login": "2019-08-12 01:38:17",
+		"Treatment_Used": "relaxing-video",
+		"Treatment_Duration": 436,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Ferris S. Mccullough",
+		"Patient_ID": "16120717-2147",
+		"Last_Login": "2019-02-27 17:27:49",
+		"Treatment_Used": "relaxing-video",
+		"Treatment_Duration": 156,
+		"Risk": 3
+	},
+	{
+		"Patient_Name": "Uma R. Brown",
+		"Patient_ID": "16710602-6094",
+		"Last_Login": "2017-11-03 03:58:03",
+		"Treatment_Used": "custom-audio",
+		"Treatment_Duration": 225,
+		"Risk": 0
+	},
+	{
+		"Patient_Name": "Sharon R. Foley",
+		"Patient_ID": "16810905-0461",
+		"Last_Login": "2018-10-15 13:04:07",
+		"Treatment_Used": "breathing-exercise",
+		"Treatment_Duration": 108,
+		"Risk": 0
+	},
+	{
+		"Patient_Name": "Ulla X. Barlow",
+		"Patient_ID": "16000104-7208",
+		"Last_Login": "2018-10-30 07:38:53",
+		"Treatment_Used": "relaxing-video",
+		"Treatment_Duration": 483,
+		"Risk": 2
+	},
+	{
+		"Patient_Name": "Leila R. Pickett",
+		"Patient_ID": "16780810-6939",
+		"Last_Login": "2018-10-20 20:11:30",
+		"Treatment_Used": "relaxing-video",
+		"Treatment_Duration": 317,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Rhona I. Gentry",
+		"Patient_ID": "16541111-5164",
+		"Last_Login": "2017-11-09 21:15:03",
+		"Treatment_Used": "yoga",
+		"Treatment_Duration": 372,
+		"Risk": 2
+	},
+	{
+		"Patient_Name": "Tashya F. Whitehead",
+		"Patient_ID": "16740723-3613",
+		"Last_Login": "2019-01-06 21:19:27",
+		"Treatment_Used": "call-a-friend",
+		"Treatment_Duration": 396,
+		"Risk": 0
+	},
+	{
+		"Patient_Name": "Brady H. Whitney",
+		"Patient_ID": "16090221-4501",
+		"Last_Login": "2018-09-26 00:51:22",
+		"Treatment_Used": "meditation",
+		"Treatment_Duration": 463,
+		"Risk": 5
+	},
+	{
+		"Patient_Name": "Brody I. Lane",
+		"Patient_ID": "16320923-2861",
+		"Last_Login": "2018-05-19 00:49:35",
+		"Treatment_Used": "breathing-exercise",
+		"Treatment_Duration": 171,
+		"Risk": 1
+	},
+	{
+		"Patient_Name": "Kellie X. Pena",
+		"Patient_ID": "16990930-3662",
+		"Last_Login": "2018-08-09 21:14:07",
+		"Treatment_Used": "custom-audio",
+		"Treatment_Duration": 280,
+		"Risk": 3
+	},
+	{
+		"Patient_Name": "Driscoll V. Bush",
+		"Patient_ID": "16891101-2436",
+		"Last_Login": "2018-11-17 19:52:06",
+		"Treatment_Used": "call-a-friend",
+		"Treatment_Duration": 444,
+		"Risk": 0
+	}
+];
+	var result=alasql('select COUNT(*) as c, Risk from ? GROUP BY Risk',[data]);
+	console.log(result);
+
+	var option = {
+            title: {
+                text: 'Risk Distribution Chart'
+            },
+            tooltip: {},
+            legend: {
+                data:['Risk']
+            },
+            xAxis: {
+                data: ["shirt","cardign","chiffon shirt","pants","heels","socks"]
+            },
+            yAxis: {},
+            series: [{
+                name: 'Risk',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        };
+	var myChart = echarts.init(document.getElementById('chartContainer'));
+	var label=[];
+	var count=[];
+	for(var i=0;i<result.length;i++){
+		label.push(result[i].Risk+"");
+		count.push(result[i].c);
+	}
+	console.log('label',label);
+	console.log('count',count);
+
+	option.xAxis.data=label;
+	option.series[0].data=count;
+	console.log(option);
+	myChart.setOption(option);
+
+	app=angular.module('myApp',[]);
+	app.controller('myCtrl',function($scope,$http){
+		$scope.data=data;
+		console.log($scope.data);
+	});
+
+	</script>
 </html>
